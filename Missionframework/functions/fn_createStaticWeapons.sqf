@@ -63,13 +63,13 @@ if (count _allStaticGarrisons > 0) then {
 						private _staticClass = "";
 						switch _typeSel do {
 							case "HMG" : {
-								_staticClass = selectRandom KPLIB_o_turrets_HMG;
+								_staticClass = selectRandom KPLIB_o_statics_HMG;
 							};
 							case "AT" : {
-								_staticClass = selectRandom KPLIB_o_turrets_AT;
+								_staticClass = selectRandom KPLIB_o_statics_AT;
 							};
 							case "AA" : {
-								_staticClass = selectRandom KPLIB_o_turrets_AA;
+								_staticClass = selectRandom KPLIB_o_statics_AA;
 							}
 						};
 						// Create the static weapon and it's crew
