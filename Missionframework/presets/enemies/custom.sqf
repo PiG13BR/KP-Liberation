@@ -149,3 +149,18 @@ KPLIB_o_planes = [
     "O_Plane_CAS_02_dynamicLoadout_F",                                  // To-199 Neophron (CAS)
     "O_Plane_Fighter_02_F"                                              // To-201 Shikra
 ];
+
+// Static HMG (Only raised)
+KPLIB_o_statics_HMG = [
+    "O_HMG_01_high_F"                                                   //Mk30 HMG .50 (Raised)
+];
+
+// Static AT
+KPLIB_o_statics_AT = [
+    "O_static_AT_F"                                                     // Static Titan Launcher (AT)
+];
+
+// Static AA
+KPLIB_o_statics_AA = [
+    "O_static_AA_F"                                                     // Static Titan Launcher (AA)
+];
