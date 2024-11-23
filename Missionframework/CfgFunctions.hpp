@@ -102,3 +102,14 @@ class KPLIB {
     #include "scripts\client\CfgFunctions.hpp"
     #include "scripts\server\CfgFunctions.hpp"
 };
+
+class PIG {
+    class functions {
+        file = "functions";
+
+        class registerGarrison          {};
+        class createGarrisons           {};
+        class createStaticWeapons       {};
+        class spawnStaticWeapon         {};
+    }
+};
