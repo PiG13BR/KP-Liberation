@@ -21,7 +21,7 @@ params ["_sector"];
 
 private _allGarrisons = [];
 
-private _structures = PIG_garrisonsHashMap get _sector;
+private _structures = KPLIB_garrisonsHashMap get _sector;
 if ((isNil "_structures") || {count _structures < 1}) exitWith {_allGarrisons};
 
 {   
