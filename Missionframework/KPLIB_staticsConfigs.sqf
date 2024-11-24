@@ -42,4 +42,4 @@ KPLIB_staticsConfigs = [
     ["Land_BagBunker_Tower_F", [[["AA", "AT"], [0.163086,1.16992,0.571415], (0)], [["HMG"], [-0.599121,-1.44092,0.571415], (180)]]]
 ];
 
-KPLIB_staticConfigs_classes = PIG_staticsConfigs apply { _x select 0 };
+KPLIB_staticConfigs_classes = KPLIB_staticsConfigs apply { _x select 0 };
