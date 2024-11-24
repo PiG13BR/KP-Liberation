@@ -44,11 +44,11 @@ private _opforcount = [] call KPLIB_fnc_getOpforCap;
 if ((!(_sector in KPLIB_sectors_player)) && (([markerPos _sector, [_opforcount] call KPLIB_fnc_getSectorRange, KPLIB_side_player] call KPLIB_fnc_getUnitsCount) > 0)) then {
 
     // Create objects
-    _garrisons = [_sector] call PIG_fnc_createSectorObjects;
+    _garrisons = [_sector] call KPLIB_fnc_createSectorObjects;
     {_managed_units pushback _x}forEach _garrisons;
 
     // Create static weapons
-    _staticWeapons = [_sector, (_local_capture_size * 1.5)] call PIG_fnc_createStaticWeapons;
+    _staticWeapons = [_sector, (_local_capture_size * 1.5)] call KPLIB_fnc_createStaticWeapons;
     {
         _managed_units pushback _x; 
         {_managed_units pushback _x}forEach (crew _x)
