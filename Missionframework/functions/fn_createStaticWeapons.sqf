@@ -34,8 +34,6 @@ if (!isNil "_blacklistGarrisons") then {
 		_pos = _x;
 		_allGarrisons = _allGarrisons select {!(_pos distance2d _x < 2)};
 	}forEach _blacklistGarrisons;
-
-	diag_log format ["GARRISONS UPDATED: %1", _allGarrisons];
 };
 
 // Create a group for the static weapons for the sector
