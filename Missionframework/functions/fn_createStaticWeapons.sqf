@@ -9,7 +9,8 @@
        Creates static weapons in the structures spawned in the sector
 
     Parameter(s):
-        
+        _sector - sector to search for buildings to spawn static weapons
+		_radius - radius to search for buildings to spawn static weapons
 
     Returns:
         All static weapons [ARRAY]
