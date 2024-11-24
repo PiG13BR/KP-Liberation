@@ -16,7 +16,7 @@
     - Be careful when making a new array. Copy an example and change the values, and then check for missing or additional commas.
 */
 
-PIG_staticsConfigs = [
+KPLIB_staticsConfigs = [
     // Vanilla
     ["Land_Cargo_Patrol_V1_F", [[["HMG"], [-1.14307,-1.2998,-0.55952], (180)]]],
     ["Land_Cargo_Patrol_V2_F", [[["HMG"], [-1,-1.3,-0.5], (180)]]],
@@ -42,4 +42,4 @@ PIG_staticsConfigs = [
     ["Land_BagBunker_Tower_F", [[["AA", "AT"], [0.163086,1.16992,0.571415], (0)], [["HMG"], [-0.599121,-1.44092,0.571415], (180)]]]
 ];
 
-PIG_staticConfigs_classes = PIG_staticsConfigs apply { _x select 0 };
+KPLIB_staticConfigs_classes = PIG_staticsConfigs apply { _x select 0 };
