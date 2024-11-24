@@ -1,17 +1,18 @@
 /*
     - Place here the structures that you want the enemy static weapons to spawn. For that, you need:
-        The classname of the building, followed by arrays in array of,
-        The type of the static weapon ("HMG", "AT", "AA"), related to ones in the presets. Can be more than one. Recommended: one type per position.
-        The positionRelative coordinates where the static weapon will spawn, relative to the structure.
-        The direction of the weapon (it will be relative to the object).
+        The classname of the building [STRING], followed by an bigger array;
+        The type of the static weapon ("HMG", "AT", "AA") [ARRAY], related to ones in the presets. Can be more than one. Recommended: one type per position;
+        The PositionRelative coordinates [ARRAY] where the static weapon will spawn, relative to the structure;
+        The direction of the weapon [NUMBER] (it will be relative to the object).
     - Example:
-        - ["classname", [[[types], [relative position], relative direction], [["HMG", "AT", "AA"], [x,y,z], (+/- dir)]]]
+        - [STRING, [[[STRING], ARRAY, NUMBER]]]
+        - ["static_weapon_classname", [[["type"], [relative position], relative direction], [["HMG", "AT", "AA"], [x,y,z], (+/- dir)], [["HMG"], [-1.14307,-1.2998,-0.55952], (180)]]]
     - To get positionRelative, stand your character where you want to static weapon to spawn and run the code below in debug, it will return a [x,y,z] array. 
         (varNameOfTheObject or cursorObject) worldToModel ASLToAGL getPosASL player
-    - Using modded static weapons may require small adjustments in relative positions
+    - Using modded static weapons may require small adjustments in relative positions.
     - To open the possibility of spawning static weapons, it requires more editing by placing those buildings classnames referenced below in the map. Some building classes may be already in the map.
-    - The static weapons will only spawn near sectors, so place the garrisons buildings near them
-    - Don't duplicate classnames
+    - The static weapons will only spawn near sectors, so place the garrisons buildings near them.
+    - Don't duplicate classnames.
     - Be careful when making a new array. Copy an example and change the values, and then check for missing or additional commas.
 */
 
@@ -39,6 +40,6 @@ PIG_staticsConfigs = [
     ["Land_BagBunker_Small_F", [[["HMG"], [0,0,-0.9], (180)]]],
     ["Land_BagBunker_Large_F", [[["HMG"], [0.0717773,-3.24316,-0.709913], (180)], [["HMG"], [2.7627,-1.0293,-0.709913], (90)]]],
     ["Land_BagBunker_Tower_F", [[["AA", "AT"], [0.163086,1.16992,0.571415], (0)], [["HMG"], [-0.599121,-1.44092,0.571415], (180)]]]
-]
+];
 
 PIG_staticConfigs_classes = PIG_staticsConfigs apply { _x select 0 };
