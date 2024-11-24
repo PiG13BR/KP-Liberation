@@ -21,6 +21,8 @@ class KPLIB {
         class createClearanceConfirm    {};
         class createCrate               {};
         class createManagedUnit         {};
+        class createSectorObjects       {};
+        class createStaticWeapons       {};
         class crGetMulti                {};
         class crGlobalMsg               {};
         class doSave                    {};
@@ -69,7 +71,9 @@ class KPLIB {
         class log                       {};
         class potatoScan                {};
         class protectObject             {};
+        class registerSectorObjects     {};
         class secondsToTimer            {};
+        class sectorObjectBlacklist     {};
         class setDiscordState           {};
         class setFobMass                {};
         class setLoadableViV            {};
@@ -83,6 +87,7 @@ class KPLIB {
         class spawnMilitaryPostSquad    {};
         class spawnMilitiaCrew          {};
         class spawnRegularSquad         {};
+        class spawnStaticWeapon         {};
         class spawnVehicle              {};
         class swapInventory             {};
     };
@@ -101,16 +106,4 @@ class KPLIB {
     };
     #include "scripts\client\CfgFunctions.hpp"
     #include "scripts\server\CfgFunctions.hpp"
-};
-
-class PIG {
-    class functions {
-        file = "functions";
-
-        class registerSectorObjects     {};
-        class createSectorObjects       {};
-        class createStaticWeapons       {};
-        class spawnStaticWeapon         {};
-        class sectorObjectBlacklist     {};
-    }
 };
