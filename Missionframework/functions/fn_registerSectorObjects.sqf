@@ -17,7 +17,7 @@
 
 if (!isServer) exitWith {};
 
-[{(!isNil "KPLIB_sectors_all") && {!isNil "PIG_sector_ObjectsBlacklist"}}, {
+[{(!isNil "KPLIB_sectors_all") && {!isNil "KPBLIB_sector_ObjectsBlacklist"}}, {
 	private _radius = KPLIB_range_sectorCapture * 1.5;
 	private _allObjects = [];
 	// Get all placed objects near sectors
@@ -30,33 +30,33 @@ if (!isServer) exitWith {};
 		_allObjects append _onlyEditedObjs;
 	}forEach KPLIB_sectors_all;
 
-	if (isNil "PIG_garrisonsHashMap") then {
+	if (isNil "KPBLIB_garrisonsHashMap") then {
 		// Creates the hashmap
-		PIG_garrisonsHashMap = createHashMap;
+		KPBLIB_garrisonsHashMap = createHashMap;
 	};
 
 	{
 		// Ignore object from blacklist (the object will not be deleted in game start and will retain any attributes from editor)
-		if (_x in PIG_sector_ObjectsBlacklist) then { continue };
+		if (_x in KPBLIB_sector_ObjectsBlacklist) then { continue };
 		private _sector = [_radius, getPos _x] call KPLIB_fnc_getNearestSector; // Nearest sector will be the key for the hashmap
 		
 		if (_sector isEqualTo "") then {[format ["%1 in position %2 is too far away from any sectors. Deleting the object.", (typeOf _x), (getPos _x)], "WARNING"] call KPLIB_fnc_log; deleteVehicle _x; continue};
 		
 		// Check if the key (sector) is already in the hashmap
-		if !(_sector in PIG_garrisonsHashMap) then {
+		if !(_sector in KPBLIB_garrisonsHashMap) then {
 			// Create a new key with a value
-			PIG_garrisonsHashMap set [_sector, [[typeOf _x, [getPosATL _x, getDir _x]]]];
+			KPBLIB_garrisonsHashMap set [_sector, [[typeOf _x, [getPosATL _x, getDir _x]]]];
 		} else {
 			// Update key values if key already exists
-			private _mapValue = PIG_garrisonsHashMap get _sector;
+			private _mapValue = KPBLIB_garrisonsHashMap get _sector;
 			private _mapNewValues = _mapValue + [[typeOf _x, [getPosATL _x, getDir _x]]];
-			PIG_garrisonsHashMap set [_sector, _mapNewValues];
+			KPBLIB_garrisonsHashMap set [_sector, _mapNewValues];
 		};
 
 		// Delete the object to spawn it later when the sector is activated
 		deleteVehicle _x;
 	}forEach _allObjects;
 
-	PIG_sector_ObjectsBlacklist = nil;
+	KPBLIB_sector_ObjectsBlacklist = nil;
 
 }, []] call CBA_fnc_waitUntilAndExecute;
