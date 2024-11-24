@@ -107,9 +107,10 @@ class PIG {
     class functions {
         file = "functions";
 
-        class registerGarrison          {};
-        class createGarrisons           {};
+        class registerSectorObjects     {};
+        class createSectorObjects       {};
         class createStaticWeapons       {};
         class spawnStaticWeapon         {};
+        class sectorObjectBlacklist     {};
     }
 };
