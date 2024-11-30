@@ -6,14 +6,14 @@
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-       Creates static weapons in the structures spawned in the sector
+       Create static weapons on available structures in the sector, provided the structures are defined in KPLIB_staticsConfig.sqf file
 
     Parameter(s):
         _sector - sector to search for buildings to spawn static weapons
-		_radius - radius to search for buildings to spawn static weapons
+		_radius - radius of search
 
     Returns:
-        All static weapons [ARRAY]
+        All static weapons created [ARRAY]
 */
 
 if (!isServer) exitWith {};
