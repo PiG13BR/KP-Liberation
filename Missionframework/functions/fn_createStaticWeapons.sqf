@@ -2,7 +2,7 @@
     File: fn_createStaticWeapons.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-22
-    Last Update: 2024-11-24
+    Last Update: 2024-11-30
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -69,8 +69,17 @@ if (count _allGarrisons > 0) then {
 						// For the selected type, it will check the static weapons presets
 						private _staticClass = "";
 						switch _typeSel do {
-							case "HMG" : {
-								_staticClass = selectRandom KPLIB_o_statics_HMG;
+							case "RAISED-HMG" : {
+								_staticClass = selectRandom KPLIB_o_statics_raisedHMG;
+							};
+							case "LOWERED-HMG" : {
+								_staticClass = selectRandom KPLIB_o_statics_loweredHMG;
+							};
+							case "RAISED-GMG" : {
+								_staticClass = selectRandom KPLIB_o_statics_raisedGMG;
+							};
+							case "LOWERED-GMG" : {
+								_staticClass = selectRandom KPLIB_o_statics_loweredGMG;
 							};
 							case "AT" : {
 								_staticClass = selectRandom KPLIB_o_statics_AT;
@@ -79,6 +88,9 @@ if (count _allGarrisons > 0) then {
 								_staticClass = selectRandom KPLIB_o_statics_AA;
 							}
 						};
+
+                        if (_staticClass isEqualTo "") exitWith {[format ["No static weapon classname found in %1", _typeSel], "WARNING"] call KPLIB_fnc_log;};
+
 						// Create the static weapon and it's crew
 						_weapon = [(_garrison modelToWorld _relPos), _staticClass, _relDir] call KPLIB_fnc_spawnStaticWeapon;
 						// Group the static weapons to share information easily.
