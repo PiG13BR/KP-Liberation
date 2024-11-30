@@ -2,11 +2,11 @@
     File: fn_createSectorObjects.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-22
-    Last Update: 2024-11-24
+    Last Update: 2024-11-30
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-       Creates the garrison buildings, provided if they were registered
+       Create registered objects in the designated sector
 
     Parameter(s):
         _sector - sector where the objects will be created [STRING]
@@ -21,7 +21,7 @@ params ["_sector"];
 
 private _allGarrisons = [];
 
-private _structures = KPLIB_garrisonsHashMap get _sector;
+private _structures = KPLIB_sectorObjects_hashMap get _sector;
 if ((isNil "_structures") || {count _structures < 1}) exitWith {_allGarrisons};
 
 {   
