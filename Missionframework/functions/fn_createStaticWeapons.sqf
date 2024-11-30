@@ -89,7 +89,7 @@ if (count _allGarrisons > 0) then {
 							}
 						};
 
-                        if (_staticClass isEqualTo "") exitWith {[format ["No static weapon classname found in %1", _typeSel], "WARNING"] call KPLIB_fnc_log;};
+                        if (_staticClass isEqualTo "") then {[format ["No static weapon classname found in type %1", _typeSel], "WARNING"] call KPLIB_fnc_log; continue};
 
 						// Create the static weapon and it's crew
 						_weapon = [(_garrison modelToWorld _relPos), _staticClass, _relDir] call KPLIB_fnc_spawnStaticWeapon;
