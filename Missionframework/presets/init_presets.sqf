@@ -136,7 +136,10 @@ KPLIB_o_battleGrpVehiclesLight  = KPLIB_o_battleGrpVehiclesLight    select {[_x]
 KPLIB_o_troopTransports         = KPLIB_o_troopTransports           select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_helicopters             = KPLIB_o_helicopters               select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_planes                  = KPLIB_o_planes                    select {[_x] call KPLIB_fnc_checkClass};
-KPLIB_o_statics_HMG             = KPLIB_o_statics_HMG               select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_statics_raisedHMG       = KPLIB_o_statics_raisedHMG         select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_statics_loweredHMG      = KPLIB_o_statics_loweredHMG        select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_statics_raisedGMG       = KPLIB_o_statics_raisedGMG         select {[_x] call KPLIB_fnc_checkClass};
+KPLIB_o_statics_loweredGMG      = KPLIB_o_statics_loweredGMG        select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_statics_AT              = KPLIB_o_statics_AT                select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_statics_AA              = KPLIB_o_statics_AA                select {[_x] call KPLIB_fnc_checkClass};
 
@@ -247,7 +250,10 @@ KPLIB_o_allTurrets_classes = [];
 {
     KPLIB_o_allTurrets_classes append _x;
 }forEach [
-    KPLIB_o_statics_HMG,
+    KPLIB_o_statics_raisedHMG,
+    KPLIB_o_statics_loweredHMG,
+    KPLIB_o_statics_raisedGMG,
+    KPLIB_o_statics_loweredGMG,
     KPLIB_o_statics_AT,
     KPLIB_o_statics_AA
 ];
