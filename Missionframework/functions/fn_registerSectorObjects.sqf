@@ -2,7 +2,7 @@
     File: fn_registerSectorObjects.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-23
-    Last Update: 2024-11-24
+    Last Update: 2024-11-30
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -30,9 +30,9 @@ if (!isServer) exitWith {};
 		_allObjects append _onlyEditedObjs;
 	}forEach KPLIB_sectors_all;
 
-	if (isNil "KPBLIB_garrisonsHashMap") then {
+	if (isNil "KPBLIB_sectorObjects_hashMap") then {
 		// Creates the hashmap
-		KPBLIB_garrisonsHashMap = createHashMap;
+		KPBLIB_sectorObjects_hashMap = createHashMap;
 	};
 
 	{
@@ -43,14 +43,14 @@ if (!isServer) exitWith {};
 		if (_sector isEqualTo "") then {[format ["%1 in position %2 is too far away from any sectors. Deleting the object.", (typeOf _x), (getPos _x)], "WARNING"] call KPLIB_fnc_log; deleteVehicle _x; continue};
 		
 		// Check if the key (sector) is already in the hashmap
-		if !(_sector in KPBLIB_garrisonsHashMap) then {
+		if !(_sector in KPBLIB_sectorObjects_hashMap) then {
 			// Create a new key with a value
-			KPBLIB_garrisonsHashMap set [_sector, [[typeOf _x, [getPosATL _x, getDir _x]]]];
+			KPBLIB_sectorObjects_hashMap set [_sector, [[typeOf _x, [getPosATL _x, getDir _x]]]];
 		} else {
 			// Update key values if key already exists
-			private _mapValue = KPBLIB_garrisonsHashMap get _sector;
+			private _mapValue = KPBLIB_sectorObjects_hashMap get _sector;
 			private _mapNewValues = _mapValue + [[typeOf _x, [getPosATL _x, getDir _x]]];
-			KPBLIB_garrisonsHashMap set [_sector, _mapNewValues];
+			KPBLIB_sectorObjects_hashMap set [_sector, _mapNewValues];
 		};
 
 		// Delete the object to spawn it later when the sector is activated
