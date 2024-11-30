@@ -151,8 +151,23 @@ KPLIB_o_planes = [
 ];
 
 // Static HMG (Only raised)
-KPLIB_o_statics_HMG = [
-    "O_HMG_01_high_F"                                                   //Mk30 HMG .50 (Raised)
+KPLIB_o_statics_raisedHMG = [
+    "O_HMG_01_high_F"                                                      //Mk30 HMG .50 (Raised)
+];
+
+// Static HMG (Only lowered)
+KPLIB_o_statics_loweredHMG = [
+    "O_HMG_01_F"                                                           //Mk30 HMG .50
+];
+
+// Static HMG (Only raised)
+KPLIB_o_statics_raisedGMG = [
+    "O_GMG_01_high_F"                                                      //Mk32 GMG 20mm (Raised)
+];
+
+// Static HMG (Only lowered)
+KPLIB_o_statics_loweredGMG = [
+    "O_GMG_01_F"                                                           //Mk32 GMG 20mm
 ];
 
 // Static AT
