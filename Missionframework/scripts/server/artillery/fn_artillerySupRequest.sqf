@@ -52,7 +52,7 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 	_grpLeader selectWeapon (binocular _grpLeader);
 	
 	sleep 10 + (random 10); // The players has a chance to kill the leader before calling the arty strike
-	if (!(alive _grpLeader) || {[_grpLeader] call PIG_fnc_aceCheckUnitUnconscious}) exitWith {["Leader is dead or unconscious"] remoteExec ["sytemChat"]};
+	if (!(alive _grpLeader) || {[_grpLeader] call KPLIB_fnc_aceCheckUnitUnconscious}) exitWith {["Leader is dead or unconscious"] remoteExec ["sytemChat"]};
 
 	// From this point, enemy artillery strike is unavoidable
 
@@ -73,7 +73,7 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 
 	// If provided position is too far from the real killer position, fire a check round instead
 	if ((_targetPos distance2d _target > 100) && (_targetPos distance2d _target < 300)) exitWith {
-		[_targetPos, 0, "HE", 1 + (random 1)] call PIG_fnc_fireArtillery;
+		[_targetPos, 0, "HE", 1 + (random 1)] call KPLIB_fnc_fireArtillery;
 
 		// Artillery strike cooldown
 		[{
@@ -88,20 +88,20 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 			
 			private _ammoType = [[100, "HE", (3 + (random 7))], [0, "SMOKE", (3 + (random 2))]] selectRandomWeighted [0.5, 0.5];
 			_ammoType params ["_spread", "_ammo", "_rounds"];
-			[_targetPos, _spread, _ammo, _rounds] call PIG_fnc_fireArtillery;
+			[_targetPos, _spread, _ammo, _rounds] call KPLIB_fnc_fireArtillery;
 		} else {
 			// Ordinary infantry
 			
 			if (sunOrMoon < 1) then {
-				_artyReturns = [_targetPos, 10, "FLARE", 1] call PIG_fnc_fireArtillery;
+				_artyReturns = [_targetPos, 10, "FLARE", 1] call KPLIB_fnc_fireArtillery;
 				_artyReturns params ["_fired", "_artyElements"];
 				if (_fired) then {
 					_eta = _artyElements select 1; // Gets the shell's ETA
 					sleep _eta + 5;
-					[_targetPos, 100, "HE", (3 + (random 7))] call PIG_fnc_fireArtillery;
+					[_targetPos, 100, "HE", (3 + (random 7))] call KPLIB_fnc_fireArtillery;
 				}
 			} else {
-				[_targetPos, 100, "HE", (3 + (random 7))] call PIG_fnc_fireArtillery;
+				[_targetPos, 100, "HE", (3 + (random 7))] call KPLIB_fnc_fireArtillery;
 			};
 		};
 	};
@@ -121,11 +121,11 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 				["_laserTarget", objNull]
 			];
 			
-			[_targetPos, 10, _ammo, _rounds, _artillery, _laserTarget] call PIG_fnc_fireArtillery;
+			[_targetPos, 10, _ammo, _rounds, _artillery, _laserTarget] call KPLIB_fnc_fireArtillery;
 		} else {
 			// Light vehicle
 			
-			[_targetPos, 10, "HE", (3 + (random 7))] call PIG_fnc_fireArtillery;
+			[_targetPos, 10, "HE", (3 + (random 7))] call KPLIB_fnc_fireArtillery;
 		}
 	};
 
