@@ -31,8 +31,8 @@ if ((_despawnObjects isEqualTo []) || {count _despawnObjects < 2}) exitWith {};
 	if (KPLIB_o_artilleryUnits isEqualTo []) then {
 
 		// Despawner
-		{[_x] call PIG_fnc_despawnObject}forEach _objects;
-		{[_x] call PIG_fnc_despawnGroup}forEach _groups;
+		{[_x] call KPLIB_fnc_despawnObject}forEach _objects;
+		{[_x] call KPLIB_fnc_despawnGroup}forEach _groups;
 		// Remove PFH
 		[_handler] call CBA_fnc_removePerFrameHandler;
 		// Call the artillery spawn script
