@@ -35,3 +35,21 @@ civinfo_delivered = compile preprocessFileLineNumbers "scripts\server\civinforma
 asymm_notifications = compile preprocessFileLineNumbers "scripts\client\asymmetric\asymm_notifications.sqf";
 
 execVM "scripts\shared\diagnostics.sqf";
+
+addMissionEventHandler ["EntityCreated", {
+    params ["_entity"];
+
+    if !(_entity isKindOf "Man") exitWith {};
+
+    _group = group _entity;
+    private _vehicles = [_group, true] call BIS_fnc_groupVehicles;
+
+    // Add group EH "UnitKilled" for each enemy group that spawns in. This EH is responsable for enemy artillery support.
+    if ((side _group == KPLIB_side_enemy) && {count _vehicles == 0} && {(typeOf (leader _group)) in [KPLIB_o_officer, KPLIB_o_squadLeader, KPLIB_o_teamLeader]}) then {
+
+        _group addEventHandler ["UnitKilled", {
+            params ["_group", "_unit", "_killer", "_instigator", "_useEffects"];
+            ["KPLIB_grpUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
+        }];
+    }
+}];
