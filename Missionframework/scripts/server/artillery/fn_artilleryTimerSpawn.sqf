@@ -17,7 +17,7 @@
 
 PIG_o_artilleryUnits = [];
 
-_sleeptime =  (20 + (random 20)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity);
+_sleeptime =  (900 + (random 900)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity);
 
 if (KPLIB_enemyReadiness >= 40) then {_sleeptime = _sleeptime * 0.75;};
 if (KPLIB_enemyReadiness >= 60) then {_sleeptime = _sleeptime * 0.75;};
