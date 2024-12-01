@@ -2,7 +2,7 @@
     File: fn_sectorObjectBlacklist.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-23
-    Last Update: 2024-11-24
+    Last Update: 2024-12-01
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -32,7 +32,7 @@ params[
     ["_canGarrison", true, [FALSE]] // To work, the structure classname must be under KPLIB_staticsConfigs. This will not enable a structure to accept static weapons spawn by magic.
 ];
 
-if (isNull _object) exitWith {["Null object provided"] call bis_fnc_error};
+if (isNull _object) exitWith {};
 
 // General blacklist variable
 if (isNil "KPLIB_sector_ObjectsBlacklist") then {
