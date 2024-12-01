@@ -27,12 +27,12 @@
 if (!isServer) exitWith {};
 
 params[
-    "_object",
+    ["_object", objNull, [objNull]],
     ["_blacklisted", true, [FALSE]],
     ["_canGarrison", true, [FALSE]] // To work, the structure classname must be under KPLIB_staticsConfigs. This will not enable a structure to accept static weapons spawn by magic.
 ];
 
-if (isNull _object) exitWith {diag_log "Null object provided"};
+if (isNull _object) exitWith {["Null object provided"] call bis_fnc_error};
 
 // General blacklist variable
 if (isNil "KPLIB_sector_ObjectsBlacklist") then {
