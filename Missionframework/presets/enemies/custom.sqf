@@ -149,3 +149,37 @@ KPLIB_o_planes = [
     "O_Plane_CAS_02_dynamicLoadout_F",                                  // To-199 Neophron (CAS)
     "O_Plane_Fighter_02_F"                                              // To-201 Shikra
 ];
+
+// Enemy artilley units
+KPLIB_o_artilleryLight = [
+    [
+        "O_Mortar_01_F",                                                 //Mk6 mortar
+        // Available ammunition for this Artillery (use the export_artyPreset.sqf file to get the classnames in order)
+        // Default ammunition is mandatory
+        [
+            
+            "ACE_1Rnd_82mm_Mo_HE",                                       // Default Ammunition - Generally HE
+            "ACE_1Rnd_82mm_Mo_Smoke",                                    // Smoke
+            "ACE_1Rnd_82mm_Mo_Illum",                                    // Flare
+            "",                                                          // Cluster
+            "ACE_1Rnd_82mm_Mo_HE_LaserGuided"                            // Laser Guided
+        ]
+    ]                                                     
+];
+
+KPLIB_o_artilleryHeavy = [
+    [
+        // Artillery
+        "O_MBT_02_arty_F",                                                //2S9 Sochor
+        // Available ammunition for this Artillery (use the export_artyPreset.sqf file to get the classnames in order)
+        // Default ammunition is mandatory
+        [
+            
+            "32Rnd_155mm_Mo_shells_O",                                     // Default Ammunition - Generally HE
+            "6Rnd_155mm_Mo_smoke_O",                                       // Smoke
+            "",                                                            // Flare
+            "2Rnd_155mm_Mo_Cluster_O",                                     // Cluster
+            "4Rnd_155mm_Mo_LG_O"                                           // LG
+        ]
+    ]
+];
