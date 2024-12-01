@@ -43,7 +43,7 @@ if (_targetPos isEqualTo [0, 0, 0]) exitWith {["No or zero pos given"] call BIS_
 
 // If no artillery is provided, find one in the pool
 if (isNull _artillery) then {
-	_artillery_battery = [] call PIG_fnc_getReadyArtillery;
+	_artillery_battery = [] call KPLIB_fnc_getReadyArtillery;
 	if (_artillery_battery isEqualTo []) exitWith {["No artillery available in the pool", "FIRE MISSION FAILED"] call KPLIB_fnc_log; [false, []]};
 	_artillery = selectRandom _artillery_battery;
 };
@@ -80,7 +80,7 @@ switch (_ammo) do {
 		if (_ammoClass != "") then {
 			_areaSpread = 0; // Precise strike
 			private _eta = _artillery getArtilleryETA [_targetPos, _ammoClass];
-			_laserTarget = [_targetPos, KPLIB_side_enemy, _eta, _targetObject] call PIG_fnc_createLaserTarget;
+			_laserTarget = [_targetPos, KPLIB_side_enemy, _eta, _targetObject] call KPLIB_fnc_createLaserTarget;
 			// Don't fire LG rounds if not found any targets to lase
 			if (isNull _laserTarget) exitWith {
 				_ammoClass = KPLIB_artyHashMap_ammo get "KPLIB_arty_HE_round"; 
