@@ -65,6 +65,9 @@ execVM "scripts\server\resources\recalculate_timer_sector.sqf";
 execVM "scripts\server\resources\unit_cap.sqf";
 execVM "scripts\server\sector\lose_sectors.sqf";
 
+waitUntil {!isNil "KPLIB_enemyReadiness"};
+[] call KPLIB_fnc_artilleryTimerSpawn;
+
 KPLIB_fsm_sectorMonitor = [] call KPLIB_fnc_sectorMonitor;
 if (KPLIB_param_highCommand) then {KPLIB_fsm_highcommand = [] call KPLIB_fnc_highcommand;};
 
@@ -140,4 +143,9 @@ if (KPLIB_param_restart > 0) then {
             [_x] call battlegroup_ai;
         }
     } foreach allGroups;
+}] call CBA_fnc_addEventHandler;
+
+["KPLIB_grpUnitKilled", {
+    params ["_group", "_unit", "_killer"];
+    [_group, _unit, _killer] call KPLIB_fnc_grpUnitKilled;
 }] call CBA_fnc_addEventHandler;
