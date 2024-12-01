@@ -136,6 +136,17 @@ KPLIB_o_battleGrpVehiclesLight  = KPLIB_o_battleGrpVehiclesLight    select {[_x]
 KPLIB_o_troopTransports         = KPLIB_o_troopTransports           select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_helicopters             = KPLIB_o_helicopters               select {[_x] call KPLIB_fnc_checkClass};
 KPLIB_o_planes                  = KPLIB_o_planes                    select {[_x] call KPLIB_fnc_checkClass};
+{
+    if !([((KPLIB_o_artilleryLight select _forEachIndex) select 0)] call KPLIB_fnc_checkClass) then {
+        KPLIB_o_artilleryLight deleteAt _forEachIndex
+    };
+}forEach KPLIB_o_artilleryLight;
+
+{
+    if !([((KPLIB_o_artilleryHeavy select _forEachIndex) select 0)] call KPLIB_fnc_checkClass) then {
+        KPLIB_o_artilleryHeavy deleteAt _forEachIndex
+    };
+}forEach KPLIB_o_artilleryHeavy;
 
 // Resistance
 KPLIB_r_units                   = KPLIB_r_units                     select {[_x] call KPLIB_fnc_checkClass};
