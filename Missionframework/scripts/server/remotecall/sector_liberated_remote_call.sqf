@@ -70,3 +70,27 @@ if (KPLIB_endgame == 0) then {
         [_liberated_sector, (random 100) < 45] spawn spawn_battlegroup;
     };
 };
+
+    // Call artillery if players captured military sector
+    if ((_liberated_sector in KPLIB_sectors_military) && {!(KPLIB_o_artilleryUnits isEqualTo [])}) then {
+        sleep (60 + (random 30)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity);
+
+        // ---------------------------------------------------------- FIRE MISSION
+        if ((random 100) <= 45) then {
+            _targetPos = getMarkerPos _liberated_sector;
+            _ammoType = [["HE", (3 + (random 7))], ["CLUSTER", (2 + (random 1))]] selectRandomWeighted [0.7, 0.3];
+            _ammoType params ["_shell", "_rounds"];
+
+            if (sunOrMoon > 0) then {
+                _artyReturns = [_targetPos, 10, "FLARE", 1] call KPLIB_fnc_fireArtillery;
+				_artyReturns params ["_fired", "_artyElements"];
+				if (_fired) then {
+					_eta = _artyElements select 1; // Gets the shell's ETA
+					sleep _eta + 5;
+					[_targetPos, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
+                } else {
+                    [_targetFob, KPLIB_range_sectorCapture, _shell, _rounds] call KPLIB_fnc_fireArtillery;
+                }		
+            }
+        }
+    }
