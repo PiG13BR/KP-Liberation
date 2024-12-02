@@ -8,7 +8,7 @@
     Description:
         This is where the object have the option to remain in the map and not be spawned/despawned in designated sector.
         Adds the object in a blacklist. The object in the blacklist will not be deleted in the game start and will retain any attributes from editor. If the object is a simple object, it will be automatic ignored in the fn_registerSectorObjects.sqf file.
-        Also, if the object classname is KPLIB_staticsConfigs, the spawning of static weapons for this building object can be disabled (NOT THE ENTIRE CLASS) and it will be managed in a different blacklist.
+        Also, if the object classname is in KPLIB_staticsConfigs, the spawning of static weapons for this building object can be disabled (NOT THE ENTIRE CLASS) and it will be managed in a different blacklist.
         To add an object in the blacklist, put this code in it's init field. Follow the examples below:
             [this] call KPLIB_fnc_sectorObjectBlacklist - object blacklisted, static weapons can spawn in garrison buildings as default
             [this, false, false] call KPLIB_fnc_sectorObjectBlacklist - object not blacklisted and static weapon spawn disabled
