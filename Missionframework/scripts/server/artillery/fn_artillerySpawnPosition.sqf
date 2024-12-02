@@ -26,7 +26,7 @@ if (KPLIB_endgame == 1) exitWith {false};
 
 private _artillery_pool = [];
 private _sectorsCaptured = 0.5 - (0.1 * KPLIB_param_difficulty);
-if ((count KPLIB_sectors_player) >= (count KPLIB_sectors_all) * _sectorsCaptured) then {_artillery_pool = PIG_o_artilleryHeavy} else {_artillery_pool = PIG_o_artilleryLight}
+if ((count KPLIB_sectors_player) >= (count KPLIB_sectors_all) * _sectorsCaptured) then {_artillery_pool = PIG_o_artilleryHeavy} else {_artillery_pool = PIG_o_artilleryLight};
 //if (KPLIB_enemyReadiness <= (80 - (5 * KPLIB_param_aggressivity))) then {_artillery_pool = PIG_o_artilleryLight} else {_artillery_pool = PIG_o_artilleryHeavy}; // placeholder
 
 private _artyClass = "";
