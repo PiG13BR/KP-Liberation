@@ -191,4 +191,11 @@ class CfgNotifications {
         color[] = {0, 0.5, 0, 1};
         sound = "taskUpdated";
     };
+    class lib_artillery: lib_default_notification {
+        title = $STR_PARAMS_ENEMYARTILLERY;
+        description = $STR_NOTIFICATION_ENEMYARTILLERY;
+        iconPicture = "a3\ui_f\data\gui\cfg\communicationmenu\artillery_ca.paa";
+        color[] = { 1, 0, 0, 1 };
+        sound = "taskFailed";
+    };
 };
