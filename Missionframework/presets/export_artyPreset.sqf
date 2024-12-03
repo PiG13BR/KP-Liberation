@@ -22,6 +22,7 @@
 
 	If you are using ACE with "Use ammunition handling" activated from the artillery options, MORTAR magazines will return as an EMPTY ARRAY.
 	The correct magazines classes for this kind of artillery are found in the ace3 wiki (https://ace3.acemod.org/wiki/class-names#mk6-mortar)
+    Put the ACE ammo class in presets ONLY if you are using ammunition handling, if not, get the classes that this scripts gives it.
 
 	For now, it works better for not rocket based artillery.
 */
