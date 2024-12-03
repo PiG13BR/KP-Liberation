@@ -2,7 +2,7 @@
     File: fn_artillerySpawnPositon.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-08-26
-    Last Update: 2024-12-01
+    Last Update: 2024-12-02
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -26,8 +26,8 @@ if (KPLIB_endgame == 1) exitWith {false};
 
 private _artillery_pool = [];
 private _sectorsCaptured = 0.5 - (0.1 * KPLIB_param_difficulty);
-if ((count KPLIB_sectors_player) >= (count KPLIB_sectors_all) * _sectorsCaptured) then {_artillery_pool = PIG_o_artilleryHeavy} else {_artillery_pool = PIG_o_artilleryLight};
-//if (KPLIB_enemyReadiness <= (80 - (5 * KPLIB_param_aggressivity))) then {_artillery_pool = PIG_o_artilleryLight} else {_artillery_pool = PIG_o_artilleryHeavy}; // placeholder
+if ((count KPLIB_sectors_player) >= (count KPLIB_sectors_all) * _sectorsCaptured) then {_artillery_pool = KPLIB_o_artilleryHeavy} else {_artillery_pool = KPLIB_o_artilleryLight};
+//if (KPLIB_enemyReadiness <= (80 - (5 * KPLIB_param_aggressivity))) then {_artillery_pool = KPLIB_o_artilleryLight} else {_artillery_pool = KPLIB_o_artilleryHeavy}; // placeholder
 
 private _artyClass = "";
 
@@ -50,6 +50,7 @@ KPLIB_artyHashMap_ammo = [
 // ---------------------------------------------------------- GET ARTILLERY MIN-MAX RANGES
 _minMaxRanges = [_artyClass, KPLIB_artyHashMap_ammo get "KPLIB_arty_HE_round"] call KPLIB_fnc_getArtilleryRanges;
 _minMaxRanges params ["_min", "_max"];
+[str _minMaxRanges] remoteExec ["systemChat"];
 
 // ---------------------------------------------------------- GET POSITION
 if (_spawn_marker isEqualTo "") then {
@@ -57,9 +58,8 @@ if (_spawn_marker isEqualTo "") then {
 	if (_spawn_marker isEqualTo "") exitWith {["No opfor spawn point found for artillery position", "WARNING"] call KPLIB_fnc_log; false};
 };
 
-private _artillery_pool = [];
-private _artillery_position_objects = [];
-private _artillery_position_groups = [];
+KPLIB_artilleryPosition_objects = [];
+KPLIB_artilleryPosition_groups = [];
 
 if !(_spawn_marker isEqualTo "") then {
 	
@@ -82,8 +82,8 @@ if !(_spawn_marker isEqualTo "") then {
 
 		// Add the new artillery to the pool
 		KPLIB_o_artilleryUnits pushBack _artillery;
-		_artillery_position_objects pushBack _artillery;
-		_artillery_position_groups pushBack (group _artillery);
+		KPLIB_artilleryPosition_objects pushBack _artillery;
+		KPLIB_artilleryPosition_groups pushBack (group _artillery);
 
 	};
 
@@ -105,6 +105,9 @@ if !(_spawn_marker isEqualTo "") then {
 	// ---------------------------------------------------------- DEFENSES
 	// Barriers
 	{
+		_x allowDamage false;
+		_x enableSimulation false;
+
 		_artyPos = getPos _x;
 		if (_x isKindOf "staticMortar") then {
 			{
@@ -114,7 +117,7 @@ if !(_spawn_marker isEqualTo "") then {
 				private _barrier = createVehicle ["Land_BagFence_Round_F", _relPos, [], 0, "CAN_COLLIDE"];
 				_barrier setDir (_barrier getDir _artyPos); 
 				
-				_artillery_position_objects pushBack _barrier;
+				KPLIB_artilleryPosition_objects pushBack _barrier;
 			} forEach [0, 90, 180, 270];
 		} else {
 			// For heavy artillery
@@ -146,7 +149,7 @@ if !(_spawn_marker isEqualTo "") then {
 				// Rotation vector fix
 				_barrier setVectorUp surfaceNormal position _barrier;
 
-				_artillery_position_objects pushBack _barrier;
+				KPLIB_artilleryPosition_objects pushBack _barrier;
 			}
 		}
 	}forEach KPLIB_o_artilleryUnits;
@@ -156,7 +159,7 @@ if !(_spawn_marker isEqualTo "") then {
 	private _grppatrol1 = [_spawn_marker, KPLIB_o_squadAir] call KPLIB_fnc_spawnRegularSquad;
 	[_grppatrol1, markerpos _spawn_marker] spawn add_defense_waypoints;
 
-	_artillery_position_groups pushBack _grppatrol1;
+	KPLIB_artilleryPosition_groups pushBack _grppatrol1;
 
 	// Standard Infantry Patrol
 	if (KPLIB_enemyReadiness >= (50 - (5 * KPLIB_param_difficulty))) then {
@@ -164,7 +167,7 @@ if !(_spawn_marker isEqualTo "") then {
 		private _grppatrol2 = [_spawn_marker, _patrol2] call KPLIB_fnc_spawnRegularSquad;
 		[_grppatrol2, markerpos _spawn_marker] spawn add_defense_waypoints;
 
-		_artillery_position_groups pushBack _grppatrol2;
+		KPLIB_artilleryPosition_groups pushBack _grppatrol2;
 	};
 
 	// Spawn trucks
@@ -172,7 +175,7 @@ if !(_spawn_marker isEqualTo "") then {
 		private _spawnPos = [(getMarkerpos _spawn_marker), 10, 100, 10, 0, 0.3, 0] call BIS_fnc_findSafePos;
 		_truck = _x createVehicle _spawnPos;
 		_truck setDir random 360;
-		_artillery_position_objects pushBack _truck;
+		KPLIB_artilleryPosition_objects pushBack _truck;
 	}forEach [KPLIB_o_transportTruckAmmo, KPLIB_o_transportTruck];
 
 	// Spawn AA vehicle
@@ -184,8 +187,8 @@ if !(_spawn_marker isEqualTo "") then {
 			};
 			private _vehtospawn = selectRandom _vehicle_pool;
 			private _aaVeh = [(getMarkerpos _spawn_marker) getPos [30 + (random 30), random 360], _vehtospawn, true] call KPLIB_fnc_spawnVehicle;
-			_artillery_position_objects pushBack _aaVeh;
-			_artillery_position_groups pushBack (group _aaVeh);
+			KPLIB_artilleryPosition_objects pushBack _aaVeh;
+			KPLIB_artilleryPosition_groups pushBack (group _aaVeh);
 		};
 	};
 
@@ -197,13 +200,18 @@ if !(_spawn_marker isEqualTo "") then {
 		_crate = [KPLIB_b_crateAmmo, 100, _spawnPos] call KPLIB_fnc_createCrate;
 	};
 
-	// Create marker and notification if enabled
+	// Create marker and notification
 	[_spawn_marker] remoteExec ["remote_call_artillery"];
 };
 
 // ---------------------------------------------------------- FINAL SETUP
 
+{
+	_x allowDamage true;
+	_x enableSimulation true;
+}forEach KPLIB_o_artilleryUnits; 
+
 // Artillery position manager
-[[_artillery_position_objects, _artillery_position_groups]] call KPLIB_fnc_artilleryPositionManager;
+[] call KPLIB_fnc_artilleryPositionManager;
 
 true
