@@ -158,11 +158,11 @@ KPLIB_o_artilleryLight = [
         // Default ammunition is mandatory
         [
             
-            "ACE_1Rnd_82mm_Mo_HE",                                       // Default Ammunition - Generally HE
-            "ACE_1Rnd_82mm_Mo_Smoke",                                    // Smoke
-            "ACE_1Rnd_82mm_Mo_Illum",                                    // Flare
+            "8Rnd_82mm_Mo_shells",                                       // Default Ammunition - Generally HE
+            "8Rnd_82mm_Mo_Smoke_white",                                  // Smoke
+            "8Rnd_82mm_Mo_Flare_white",                                  // Flare
             "",                                                          // Cluster
-            "ACE_1Rnd_82mm_Mo_HE_LaserGuided"                            // Laser Guided
+            ""                                                           // Laser Guided
         ]
     ]                                                     
 ];
