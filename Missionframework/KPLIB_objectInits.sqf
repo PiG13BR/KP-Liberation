@@ -114,7 +114,40 @@ KPLIB_objectInits = [
     // Add valid vehicles to support module, if system is enabled
     [
         KPLIB_param_supportModule_artyVeh,
-        {if (KPLIB_param_supportModule > 0) then {KPLIB_param_supportModule_arty synchronizeObjectsAdd [_this];};}
+        {
+            if (KPLIB_param_supportModule > 0) then {KPLIB_param_supportModule_arty synchronizeObjectsAdd [_this];};
+            // ---------------------------------------------------------- COUNTER-ARTILLERY MANAGEMENT
+            _this addEventHandler ["Fired", {
+                params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+                
+                if (side _gunner == KPLIB_side_player) then {
+
+                    // Check artillery fired ammo
+                    if (getNumber(configFile >> "CfgAmmo" >> _ammo >> "artilleryLock") < 1) exitWith {};
+
+                    // Check if the enemy artillery is available
+                    if (isNil "KPLIB_o_artilleryUnits") exitWith {};
+                    if (KPLIB_o_artilleryUnits isEqualTo []) exitWith {};
+                    // Add Deleted EH to the projectile. When explodes, run the counter artillery script
+                    [_projectile, "Explode", {
+                        params ["_projectile", "_pos", "_velocity"];
+                        [_thisArgs, _pos] remoteExec ["KPLIB_fnc_counterArtillery", 2];
+                    }, _unit] call CBA_fnc_addBISEventHandler;
+
+                    // Add EH for shells that creates submunitions
+                    _unit setVariable ["KPLIB_count_subMunition", 0]; // To avoid calling the counter script multiple times
+                    [_projectile, "SubmunitionCreated", {
+                        params ["_projectile", "_submunitionProjectile", "_pos", "_velocity"];
+                        _countSubMunition = (_thisArgs getVariable "KPLIB_count_subMunition");
+                        _countSubMunition = _countSubMunition + 1;
+
+                        if (_countSubMunition > 1) exitWith {};
+                        
+                        [_thisArgs, _pos] remoteExec ["KPLIB_fnc_counterArtillery", 2];
+                    }, _unit] call CBA_fnc_addBISEventHandler;
+                };
+            }];
+        }
     ],
 
     // Disable autocombat (if set in parameters) and fleeing
