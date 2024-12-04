@@ -32,6 +32,7 @@ class addMagazinesMortar            {};
     class artilleryTimerSpawn           {};
     class createLaserTarget             {};
     class fireArtillery                 {};
+    class getArtySpawnPoint             {};
     class getNearestArtillery           {};
     class getReadyArtillery             {};
     class grpUnitKilled                 {};
