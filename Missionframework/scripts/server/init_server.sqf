@@ -31,6 +31,7 @@ attack_in_progress_sector = compile preprocessFileLineNumbers "scripts\server\se
 ied_manager = compile preprocessFileLineNumbers "scripts\server\sector\ied_manager.sqf";
 manage_one_sector = compile preprocessFileLineNumbers "scripts\server\sector\manage_one_sector.sqf";
 wait_to_spawn_sector = compile preprocessFileLineNumbers "scripts\server\sector\wait_to_spawn_sector.sqf";
+[] call KPLIB_fnc_registerSectorObjects;
 
 // Globals
 KPLIB_sectors_active = []; publicVariable "KPLIB_sectors_active";
