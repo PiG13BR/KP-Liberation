@@ -7452,5 +7452,9 @@
 			<Original>Hostile Artillery spotted near %1.</Original>
 			<Portuguese>Artilharia Inimiga avistada perto de %1</Portuguese>
 		</Key>
+        <Key ID="STR_NOTIFICATION_ENEMYARTILLERY_FIRING">
+			<Original>Hostile Artillery is targeting your position!</Original>
+			<Portuguese>Artilharia Inimiga está direcionando os tiros para sua posição!</Portuguese>
+		</Key>
     </Package>
 </Project>
