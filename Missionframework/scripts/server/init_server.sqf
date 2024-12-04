@@ -149,3 +149,27 @@ if (KPLIB_param_restart > 0) then {
     params ["_group", "_unit", "_killer"];
     [_group, _unit, _killer] call KPLIB_fnc_grpUnitKilled;
 }] call CBA_fnc_addEventHandler;
+
+addMissionEventHandler ["ArtilleryShellFired", {
+    params ["_vehicle", "_weapon", "_ammo", "_gunner", "_instigator", "_artilleryTarget", "_targetPosition", "_shell"];
+
+    // ---------------------------------------------------------- NOTIFY PLAYERS OF INCOMING SHELLS
+    if (side _gunner == KPLIB_side_enemy) then {
+
+        // Is firing at player's position. Only notify those under 150m radius of the target position.
+        private _playersInArea = [];
+        _playersInArea = allPlayers select {_x distance2d _targetPosition <= 150};
+        if (_playersInArea isEqualTo []) exitWith {};
+
+        // Get Shell ETA
+        private _magazine = [];
+        _allMags = getArtilleryAmmo [_vehicle];
+        _magazine = _allMags select {(getText(configFile >> "CfgMagazines" >> _x >> "ammo")) == _ammo};
+        if (_magazine isEqualTo []) exitWith {};
+
+        _magazine = _magazine select 0;
+        _eta = _vehicle getArtilleryETA [_targetPosition, _magazine];
+
+        [_gunner, _targetPosition, _eta] remoteExec ["remote_call_artillery_firing", _playersInArea];
+    }
+}];
