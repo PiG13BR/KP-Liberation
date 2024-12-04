@@ -50,11 +50,10 @@ KPLIB_artyHashMap_ammo = [
 // ---------------------------------------------------------- GET ARTILLERY MIN-MAX RANGES
 _minMaxRanges = [_artyClass, KPLIB_artyHashMap_ammo get "KPLIB_arty_HE_round"] call KPLIB_fnc_getArtilleryRanges;
 _minMaxRanges params ["_min", "_max"];
-[str _minMaxRanges] remoteExec ["systemChat"];
 
 // ---------------------------------------------------------- GET POSITION
 if (_spawn_marker isEqualTo "") then {
-	_spawn_marker = [_min, _max, false, markerPos _spawn_marker] call KPLIB_fnc_getOpforSpawnPoint;
+	_spawn_marker = _spawn_marker = [_min, _max] call KPLIB_fnc_getArtySpawnPoint;
 	if (_spawn_marker isEqualTo "") exitWith {["No opfor spawn point found for artillery position", "WARNING"] call KPLIB_fnc_log; false};
 };
 
