@@ -15,8 +15,6 @@
 		-
 */
 
-if ((_despawnObjects isEqualTo []) || {count _despawnObjects < 2}) exitWith {};
-
 // Add PFH to update the artillery units variable
 [{
 	params["_args", "_handler"];
