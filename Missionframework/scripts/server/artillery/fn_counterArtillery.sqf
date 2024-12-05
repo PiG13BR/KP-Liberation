@@ -25,16 +25,16 @@ if (count (((ASLToAGL _shellPos) nearEntities [["Man", "landVehicle"], 200]) sel
 
 // Each time that blufor fires an artillery and targets enemy units by shell exploding near them, it will raise the chance of the counter artillery
 // Get the original value from KPLIB_config.sqf into a new variable to modifity it without modifying the original value itself
-if (isNil "PIG_counterArtyChance") then {
+if (isNil "KPLIB_counterArtyChance") then {
 	// Resets value if nil
-	PIG_counterArtyChance = 25;
-	publicVariableServer "PIG_counterArtyChance"
+	KPLIB_counterArtyChance = 25;
+	publicVariableServer "KPLIB_counterArtyChance"
 };
 
-PIG_counterArtyChance = PIG_counterArtyChance + 5;
-publicVariableServer "PIG_counterArtyChance";
+KPLIB_counterArtyChance = KPLIB_counterArtyChance + 5;
+publicVariableServer "KPLIB_counterArtyChance";
 
-if (PIG_counterArtyChance >= 100) then {PIG_counterArtyChance = 100; publicVariableServer "PIG_counterArtyChance";};
+if (KPLIB_counterArtyChance >= 100) then {KPLIB_counterArtyChance = 100; publicVariableServer "KPLIB_counterArtyChance";};
 
 if (side _unit == KPLIB_side_player) then {
 
@@ -46,12 +46,12 @@ if (side _unit == KPLIB_side_player) then {
 	if (!isNil "_nearestArtillery") then {
 			_chanceOfFiring = 100; // Always react
 		} else {
-			_chanceOfFiring = PIG_counterArtyChance // Has a chance to react
+			_chanceOfFiring = KPLIB_counterArtyChance // Has a chance to react
 		};
 	if ((random 100) <= _chanceOfFiring) then {
 
-		if (_unit getVariable ["PIG_CounterArtyReaction", false]) exitWith {}; // Exit loop
-		_unit setVariable ["PIG_CounterArtyReaction", true];
+		if (_unit getVariable ["KPLIB_CounterArtyReaction", false]) exitWith {}; // Exit loop
+		_unit setVariable ["KPLIB_CounterArtyReaction", true];
 
 		// Enemy artillery reaction time
 		sleep ((10 + (random 20)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity));
@@ -72,6 +72,6 @@ if (side _unit == KPLIB_side_player) then {
 
 		// Delay
 		sleep ((10 + (random 20)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity));
-		_unit setVariable ["PIG_CounterArtyReaction", nil];
+		_unit setVariable ["KPLIB_CounterArtyReaction", nil];
 	}
 };
