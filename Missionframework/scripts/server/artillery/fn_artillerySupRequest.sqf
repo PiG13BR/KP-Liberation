@@ -52,7 +52,7 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 	_grpLeader selectWeapon (binocular _grpLeader);
 	
 	sleep 10 + (random 10); // The players has a chance to kill the leader before calling the arty strike
-	if (!(alive _grpLeader) || {[_grpLeader] call KPLIB_fnc_aceCheckUnitUnconscious}) exitWith {["Leader is dead or unconscious"] remoteExec ["sytemChat"]};
+	if (!(alive _grpLeader) || {[_grpLeader] call KPLIB_fnc_aceCheckUnitUnconscious}) exitWith {};
 
 	// From this point, enemy artillery strike is unavoidable
 
