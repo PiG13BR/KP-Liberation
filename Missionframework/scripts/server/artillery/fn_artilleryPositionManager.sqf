@@ -2,7 +2,7 @@
     File: fn_artilleryPositionManager.sqf
     Author: PiG13BR - https://github.com/PiG13BR
 	Date: 2024-10-06
-	Last Update: 2024-12-02
+	Last Update: 2024-12-05
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -31,7 +31,9 @@ if ((_despawnObjects isEqualTo []) || {count _despawnObjects < 2}) exitWith {};
 		// Call the artillery spawn script
 		[] call KPLIB_fnc_artilleryTimerSpawn;
 		// Reset counter artillery chance
-		PIG_counterArtyChance = nil;
+		KPLIB_counterArtyChance = nil;
 		KPLIB_artyHashMap_ammo = nil;
+        KPLIB_artilleryPosition_objects = nil;
+		KPLIB_artilleryPosition_groups = nil;
 	};
 }, 60, []] call CBA_fnc_addPerFrameHandler; 
