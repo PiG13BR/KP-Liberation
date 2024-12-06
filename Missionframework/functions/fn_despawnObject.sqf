@@ -2,7 +2,7 @@
     File: fn_despawnObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 24-09-18
-    Last Update: 24-10-06
+    Last Update: 24-12-05
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -38,7 +38,6 @@ if (_veh isEqualTo objNull) exitWith {};
 		true;
 	};
 
-	if ((!alive _veh) && {_despawn}) exitWith {deleteVehicle _veh; [_handler] call CBA_fnc_removePerFrameHandler;};
 	if (_despawn) exitWith {deleteVehicle _veh; [_handler] call CBA_fnc_removePerFrameHandler; _veh setVariable ["inDespawner", nil];};
 	
 }, 60, _veh] call CBA_fnc_addPerFrameHandler;
