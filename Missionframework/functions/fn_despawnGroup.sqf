@@ -2,7 +2,7 @@
     File: fn_despawnObject.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 24-09-18
-    Last Update: 24-10-06
+    Last Update: 24-12-05
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -47,8 +47,6 @@ if (_grp isEqualTo grpNull) exitWith {};
 
 	if (_despawn) exitWith { 
 		{
-			if (vehicle _x != _x) then {deleteVehicle (vehicle _x); continue};
-			if (!alive _x) then {deleteVehicle _x; continue};
 			deleteVehicle _x;
 		}forEach units _group;
 		_group setVariable ["inDespawner", nil];
