@@ -2,7 +2,7 @@
 	File: fn_artilleryFobTargeting.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 2024-04-28
-	Last Update: 2024-06-28
+	Last Update: 2024-12-05
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
