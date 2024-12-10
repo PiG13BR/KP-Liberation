@@ -39,7 +39,7 @@ _weapon addMPEventHandler ["MPKilled", {
 // Infinite ammo.
 _weapon addEventHandler ["Reloaded", {
 	params ["_unit", "_weapon", "_muzzle", "_newMagazine", "_oldMagazine"];
-	_unit setVehicleAmmo 1;
+	if !(isPlayer (gunner _unit)) then {_unit setVehicleAmmo 1};
 }];
 
 [_weapon] call KPLIB_fnc_clearCargo;
