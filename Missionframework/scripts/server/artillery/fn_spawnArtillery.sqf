@@ -142,7 +142,7 @@ if (_newartillery isKindOf "StaticWeapon") then {
 // ---------------------------------------------------------- FINAL SETUP AND RETURN
 // Set this variable to check if the artillery is busy (Default: false)
 _gunner = gunner _newartillery;
-_gunner setVariable ["PIG_isArtilleryBusy", false, true];
+_gunner setVariable ["KPLIB_isArtilleryBusy", false, true];
 
 _newartillery allowDamage true;
 _newartillery setDamage 0;
