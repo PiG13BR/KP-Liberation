@@ -76,21 +76,8 @@ _sleeptime =  (300 + (random 300)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB
 
 			if (_fireAtFOBChance > 100) then {_fireAtFOBChance = 100};
 
-			// Target fobs only if there are enough players in the game. Default is >= 6.
-			//_playerCount = [] call KPLIB_fnc_getPlayerCount;
-
 			if ((random 100) <= _fireAtFOBChance) then {
 
-				//_artillery_battery = [] call PIG_fnc_getReadyArtillery;
-				
-				// Select a random artillery in the pool
-				//_artillery = selectRandom _artillery_battery;
-
-				// Select random fob to target it
-				//private _fobsAtRange = [];
-				// Get only the fobs at artillery range
-				//_fobsAtRange = KPLIB_sectors_fob select {(_x vectorAdd [100,100,0]) inRangeOfArtillery [[_artillery], KPLIB_artyHashMap_ammo get "KPLIB_arty_HE_round"]}; 
-				//if (_fobsAtRange isEqualTo []) exitWith {["No fobs in artillery range", "FOB FIRE MISSION FAILED"] call KPLIB_fnc_log;};
 				// Returns a random fob position
 				private _targetFob = selectRandom _fobsAtRange; 
 
