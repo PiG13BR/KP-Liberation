@@ -15,7 +15,7 @@
         -
 */
 
-PIG_o_artilleryUnits = [];
+KPLIB_o_artilleryUnits = [];
 
 _sleeptime =  (900 + (random 900)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity);
 
@@ -29,7 +29,7 @@ if (KPLIB_enemyReadiness >= 80) then {_sleeptime = _sleeptime * 0.75;};
         params ["_args", "_handler"];
         if ((!isNil "KPLIB_sectors_fob") && {KPLIB_sectors_fob isNotEqualTo []}) then {
             // Spawns the artillery position
-            if ((PIG_o_artilleryUnits isEqualTo []) && {KPLIB_enemyReadiness >= 15}) then {
+            if ((KPLIB_o_artilleryUnits isEqualTo []) && {KPLIB_enemyReadiness >= 15}) then {
                 if ((count (allPlayers - entities "HeadlessClient_F") >= (1 / KPLIB_param_aggressivity))) then {
                     private _artySpawned = [""] call KPLIB_fnc_artillerySpawnPosition;
                     if (_artySpawned) then {
