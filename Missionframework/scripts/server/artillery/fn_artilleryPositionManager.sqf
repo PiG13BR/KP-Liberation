@@ -24,8 +24,8 @@ if ((_despawnObjects isEqualTo []) || {count _despawnObjects < 2}) exitWith {};
 
 	if (KPLIB_o_artilleryUnits isEqualTo []) then {
 		// Despawner
-		{[_x] call PIG_fnc_despawnGroup}forEach KPLIB_artilleryPosition_groups;
-		{[_x] call PIG_fnc_despawnObject}forEach KPLIB_artilleryPosition_objects;
+		{[_x] call KPLIB_fnc_despawnGroup}forEach KPLIB_artilleryPosition_groups;
+		{[_x] call KPLIB_fnc_despawnObject}forEach KPLIB_artilleryPosition_objects;
 		["Arty position destroyed. Despawner initiated", "ARTILLERY POSITION"] call KPLIB_fnc_log;
 		// Remove PFH
 		[_handler] call CBA_fnc_removePerFrameHandler;
