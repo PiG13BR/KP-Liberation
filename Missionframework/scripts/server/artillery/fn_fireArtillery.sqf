@@ -50,7 +50,7 @@ if (isNull _artillery) then {
 
 // ---------------------------------------------------------- SET ARTILLERY TO BUSY
 _gunnerArty = gunner _artillery;
-_gunnerArty setVariable ["PIG_isArtilleryBusy", true, true];
+_gunnerArty setVariable ["KPLIB_isArtilleryBusy", true, true];
 
 // ---------------------------------------------------------- SELECT AMMO
 private _ammoClass = "";
@@ -94,14 +94,14 @@ switch (_ammo) do {
 if (_ammoClass == "") then {_ammoClass = KPLIB_artyHashMap_ammo get "KPLIB_arty_HE_round"; _rounds = 3;};
 // If it's still getting a empty string, exit the script
 if (_ammoClass == "") exitWith {["No ammo class found. Check your preset"] call BIS_fnc_error; 
-	_gunnerArty setVariable ["PIG_isArtilleryBusy", false, true];
+	_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
 	[false, []]
 };
 
 // ---------------------------------------------------------- CHECK RANGE
 if !(_targetPos inRangeOfArtillery [[_artillery], _ammoClass]) exitWith {
 	["The target is out of artillery range or wrong magazine type provided in presets or artillery is null", "FIRE MISSION FAILED"] call KPLIB_fnc_log;
-	_gunnerArty setVariable ["PIG_isArtilleryBusy", false, true];
+	_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
 	[false, []]
 };
 
@@ -130,7 +130,7 @@ private _eta = _artillery getArtilleryETA [_targetPos, _ammoClass];
 		sleep (3 + _reloadTime);
 	};
 	// ---------------------------------------------------------- SET ARTILLERY TO NOT BUSY
-	_gunnerArty setVariable ["PIG_isArtilleryBusy", false, true];
+	_gunnerArty setVariable ["KPLIB_isArtilleryBusy", false, true];
 };
 
 [true, [_artillery, _eta, _ammoClass, _rounds, _gunnerArty]]
