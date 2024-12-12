@@ -24,7 +24,9 @@
 	The correct magazines classes for this kind of artillery are found in the ace3 wiki (https://ace3.acemod.org/wiki/class-names#mk6-mortar)
     Put the ACE ammo class in presets ONLY if you are using ammunition handling, if not, get the classes that this scripts gives it.
 
-	For now, it works better for not rocket based artillery.
+		For now, it works fine for SPA.
+
+	If you still can't find magazines (magazines array returning empty), you can use magazinesAmmo or magazinesAllTurrets commands and put them manually
 */
 
 params["_artillery"];
@@ -164,6 +166,7 @@ _exportArray pushBack (typeOf _artillery);
 _exportArray pushBack _ammoAvailable;
 hint str _exportArray;
 copyToClipboard str _exportArray; // and CTRL+V anywhere
+_exportArray
 
 /*
 	SOME MAGAZINES ARRAY CHECKS:
