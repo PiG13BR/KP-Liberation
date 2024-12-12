@@ -2,7 +2,7 @@
 	File: fn_spawnArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 2024-09-04
-	Last Update: 2024-12-01
+	Last Update: 2024-12-12
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -71,7 +71,8 @@ _newartillery setDir (getDir _newartillery + (_newartillery getRelDir _fob));
 [_newartillery] call KPLIB_fnc_addObjectInit;
 
 // Spawn crew of vehicle
-private _crewGrp = createVehicleCrew _newartillery;
+private _crewGrp = createGroup KPLIB_side_enemy;
+_crewGrp createVehicleCrew _newartillery;
 
 // Lock vehicle 
 [_newartillery, "LOCKEDPLAYER"] remoteExec ["setVehicleLock"];
