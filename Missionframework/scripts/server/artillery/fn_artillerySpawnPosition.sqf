@@ -2,7 +2,7 @@
     File: fn_artillerySpawnPositon.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-08-26
-    Last Update: 2024-12-02
+    Last Update: 2024-12-11
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -53,7 +53,7 @@ _minMaxRanges params ["_min", "_max"];
 
 // ---------------------------------------------------------- GET POSITION
 if (_spawn_marker isEqualTo "") then {
-	_spawn_marker = _spawn_marker = [_min, _max] call KPLIB_fnc_getArtySpawnPoint;
+	_spawn_marker = [_min, _max] call KPLIB_fnc_getArtySpawnPoint;
 	if (_spawn_marker isEqualTo "") exitWith {["No opfor spawn point found for artillery position", "WARNING"] call KPLIB_fnc_log; false};
 };
 
@@ -181,8 +181,14 @@ if !(_spawn_marker isEqualTo "") then {
 	[_spawn_marker] spawn {
 		params ["_spawn_marker"];
 		if (KPLIB_enemyReadiness >= (65 - (5 * KPLIB_param_difficulty))) then {
-			private _vehicle_pool = KPLIB_o_battleGrpVehicles select {
+			private _vehicle_pool = [];
+			// Try to get an AA vehicle from the preset
+			_vehicle_pool = KPLIB_o_battleGrpVehicles select {
 				!(_x isKindOf "Air") && (count (_x call BIS_fnc_allTurrets) > 0) && ((getNumber(configfile >> "CfgVehicles" >> _x >> "radarType")) == 2) // Still can spawn other vehicles that might have radar (e.g T-14K Armata)
+			};
+			// If not found any AA vehicles, get any vehicle
+			if (_vehicle_pool isEqualTo []) then {
+				_vehicle_pool = KPLIB_o_battleGrpVehicles;
 			};
 			private _vehtospawn = selectRandom _vehicle_pool;
 			private _aaVeh = [(getMarkerpos _spawn_marker) getPos [30 + (random 30), random 360], _vehtospawn, true] call KPLIB_fnc_spawnVehicle;
