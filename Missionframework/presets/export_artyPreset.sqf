@@ -24,14 +24,14 @@
 	The correct magazines classes for this kind of artillery are found in the ace3 wiki (https://ace3.acemod.org/wiki/class-names#mk6-mortar)
     Put the ACE ammo class in presets ONLY if you are using ammunition handling, if not, get the classes that this scripts gives it.
 
-		For now, it works fine for SPA.
+	For now, it works fine for SPA.
 
 	If you still can't find magazines (magazines array returning empty), you can use magazinesAmmo or magazinesAllTurrets commands and put them manually
 */
 
 params["_artillery"];
 
-private _ammoAvailable = [];
+private _ammoAvailable = ["", "", "", "", ""];
 private _allMags = [];
 
 _allMags = getArtilleryAmmo [_artillery];
@@ -53,7 +53,8 @@ if !(isNil "_ammoHE") then {
 	missionNamespace setVariable ["arty_HE_shell", _ammoHE, true];
 	_allMags = _allMags - _HEAmmoArray;
 
-	_ammoAvailable pushBack _ammoHE;
+	//_ammoAvailable pushBack _ammoHE;
+	_ammoAvailable set [0, _ammoHE];
 } else {
 	missionNamespace setVariable ["arty_HE_shell", nil, true];
 };
@@ -81,7 +82,8 @@ if !(isNil "_ammoSmoke") then {
 	missionNamespace setVariable ["arty_SMOKE_shell", _ammoSmoke, true];
 	_allMags = _allMags - _smokeAmmoArray;
 	
-	_ammoAvailable pushBack _ammoSmoke;
+	//_ammoAvailable pushBack _ammoSmoke;
+	_ammoAvailable set [1, _ammoSmoke];
 } else {
 	missionNamespace setVariable ["arty_SMOKE_shell", nil, true];
 };
@@ -111,7 +113,8 @@ if !(isNil "_ammoFlare") then {
 	missionNamespace setVariable ["arty_CLUSTER_shell", _ammoFlare, true];
 	_allMags = _allMags - _flareAmmoArray;
 
-	_ammoAvailable pushBack _ammoFlare;
+	//_ammoAvailable pushBack _ammoFlare;
+	_ammoAvailable set [2, _ammoFlare];
 } else {
 	missionNamespace setVariable ["arty_CLUSTER_shell", nil, true];
 };
@@ -132,7 +135,8 @@ if !(isNil "_ammoLg") then {
 	missionNamespace setVariable ["arty_LG_shell", _ammoLg, true];
 	_allMags = _allMags - _lgAmmoArray;
 
-	_ammoAvailable pushBack _ammoLg;
+	//_ammoAvailable pushBack _ammoLg;
+	_ammoAvailable set [3, _ammoLg];
 } else {
 	missionNamespace setVariable ["arty_LG_shell", nil, true];
 };
@@ -155,7 +159,8 @@ _ammoCluster = _clusterAmmoArray select 0;
 if !(isNil "_ammoCluster") then {
 	missionNamespace setVariable ["arty_CLUSTER_shell", _ammoCluster, true];
 
-	_ammoAvailable pushBack _ammoCluster;
+	//_ammoAvailable pushBack _ammoCluster;
+	_ammoAvailable set [4, _ammoCluster];
 } else {
 	missionNamespace setVariable ["arty_CLUSTER_shell", nil, true];
 };
@@ -166,8 +171,7 @@ _exportArray pushBack (typeOf _artillery);
 _exportArray pushBack _ammoAvailable;
 hint str _exportArray;
 copyToClipboard str _exportArray; // and CTRL+V anywhere
-_exportArray
-
+_exportArray;
 /*
 	SOME MAGAZINES ARRAY CHECKS:
 
