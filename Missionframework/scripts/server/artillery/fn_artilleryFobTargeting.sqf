@@ -2,7 +2,7 @@
 	File: fn_artilleryFobTargeting.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 2024-04-28
-	Last Update: 2024-12-05
+	Last Update: 2024-12-13
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -81,7 +81,7 @@ _sleeptime =  (300 + (random 300)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB
 				// Returns a random fob position
 				private _targetFob = selectRandom _fobsAtRange; 
 
-				[_artillery, _targetFob] call KPLIB_fnc_artilleryFobFiring;
+				[_targetFob] call KPLIB_fnc_artilleryFobFiring;
 
 				// Remove PFH
 				[_handler] call CBA_fnc_removePerFrameHandler;
