@@ -69,9 +69,8 @@ if (KPLIB_endgame == 0) then {
     ) then {
         [_liberated_sector, (random 100) < 45] spawn spawn_battlegroup;
     };
-};
 
-    // Call artillery if players captured military sector
+        // Call artillery if players captured military sector
     if ((_liberated_sector in KPLIB_sectors_military) && {!(KPLIB_o_artilleryUnits isEqualTo [])}) then {
         sleep (60 + (random 30)) / (([] call KPLIB_fnc_getOpforFactor) * KPLIB_param_aggressivity);
 
@@ -94,3 +93,6 @@ if (KPLIB_endgame == 0) then {
             }
         }
     }
+};
+
+
