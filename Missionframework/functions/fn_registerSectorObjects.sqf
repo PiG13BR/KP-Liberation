@@ -6,7 +6,8 @@
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
-        Registers pre-placed objects from a sector into a hashmap and deletes them from the map
+        Registers pre-placed objects from a sector into a hashmap and deletes them from the map.
+		Only objects close enough to sectors will be registered.
 
     Parameter(s):
         -
@@ -18,19 +19,21 @@
 if (!isServer) exitWith {};
 
 [{(!isNil "KPLIB_sectors_all") && {!isNil "KPLIB_sector_ObjectsBlacklist"}}, {
-	private _radius = KPLIB_range_sectorCapture * 1.5;
+	private _radius = KPLIB_range_sectorCapture;
 	private _allObjects = [];
 	// Get all placed objects near sectors
 	{
 		_editedObjs = nearestObjects [(markerPos _x), ["Static", "Thing"], _radius];
-        // Get the terrain objects. It will also get simple objects set up from attributes.
-		_terrainObjs = nearestTerrainObjects [(markerPos _x), [], _radius]; 
+		// Get the terrain objects. It will also get simple objects set up from attributes.
+		_terrainObjs = nearestTerrainObjects [(markerPos _x), [], _radius, false]; 
 
+		 // Protect terrain objects, radio towers and production objects
 		_onlyEditedObjs = (_editedObjs - _terrainObjs);
 
 		_allObjects append _onlyEditedObjs;
+		
 	}forEach KPLIB_sectors_all;
-
+	
 	if (isNil "KPLIB_sectorObjects_hashMap") then {
 		// Creates the hashmap
 		KPLIB_sectorObjects_hashMap = createHashMap;
@@ -41,7 +44,6 @@ if (!isServer) exitWith {};
 		if (_x in KPLIB_sector_ObjectsBlacklist) then { continue };
 		// Ignore objects from config and player presets
 		if ((typeOf _x) in KPLIB_radioTowerClassnames) then { continue };
-
 		if ((typeOf _x) in [KPLIB_b_smallStorage, KPLIB_b_largeStorage, KPLIB_b_crateSupply, KPLIB_b_crateAmmo, KPLIB_b_crateFuel]) then { continue };
 
 		private _sector = [_radius, getPos _x] call KPLIB_fnc_getNearestSector; // Nearest sector will be the key for the hashmap
