@@ -150,26 +150,20 @@ if (KPLIB_param_restart > 0) then {
     [_group, _unit, _killer] call KPLIB_fnc_grpUnitKilled;
 }] call CBA_fnc_addEventHandler;
 
-addMissionEventHandler ["ArtilleryShellFired", {
-    params ["_vehicle", "_weapon", "_ammo", "_gunner", "_instigator", "_artilleryTarget", "_targetPosition", "_shell"];
+addMissionEventHandler ["EntityCreated", {
+    params ["_entity"];
 
-    // ---------------------------------------------------------- NOTIFY PLAYERS OF INCOMING SHELLS
-    if (side _gunner == KPLIB_side_enemy) then {
+    if !(_entity isKindOf "Man") exitWith {};
 
-        // Is firing at player's position. Only notify those under 150m radius of the target position.
-        private _playersInArea = [];
-        _playersInArea = allPlayers select {_x distance2d _targetPosition <= 150};
-        if (_playersInArea isEqualTo []) exitWith {};
+    _group = group _entity;
+    private _vehicles = [_group, true] call BIS_fnc_groupVehicles;
 
-        // Get Shell ETA
-        private _magazine = [];
-        _allMags = getArtilleryAmmo [_vehicle];
-        _magazine = _allMags select {(getText(configFile >> "CfgMagazines" >> _x >> "ammo")) == _ammo};
-        if (_magazine isEqualTo []) exitWith {};
+    // Add group EH "UnitKilled" for each enemy group that spawns in. This EH is responsable for enemy artillery support.
+    if ((side _group == KPLIB_side_enemy) && {count _vehicles == 0} && {(typeOf (leader _group)) in [KPLIB_o_officer, KPLIB_o_squadLeader, KPLIB_o_teamLeader]}) then {
 
-        _magazine = _magazine select 0;
-        _eta = _vehicle getArtilleryETA [_targetPosition, _magazine];
-
-        [_gunner, _targetPosition, _eta] remoteExec ["remote_call_artillery_firing", _playersInArea];
+        _group addEventHandler ["UnitKilled", {
+            params ["_group", "_unit", "_killer", "_instigator", "_useEffects"];
+            ["KPLIB_grpUnitKilled", [_group, _unit, _killer]] call CBA_fnc_localEvent;
+        }];
     }
 }];
