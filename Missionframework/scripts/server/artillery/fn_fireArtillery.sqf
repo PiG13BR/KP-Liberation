@@ -2,7 +2,7 @@
 	File: fn_fireArtillery.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 2024-09-04
-	Last Update: 2024-10-21
+	Last Update: 2024-12-16
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -114,13 +114,19 @@ if (_reloadTime < 1) then {_reloadTime = 1};
 
 private _eta = _artillery getArtilleryETA [_targetPos, _ammoClass];
 
+// Notify players in the target area
+private _playersInArea = [];
+_playersInArea = allPlayers select {_x distance2d _targetPos <= _areaSpread};
+if (_playersInArea isEqualTo []) exitWith {};
+[_gunnerArty, _targetPos, _eta, _areaSpread] remoteExec ["remote_call_artillery_firing", _playersInArea];
+
+// Fire artillery
 [_artillery, _targetPos, _areaSpread, _ammoClass, floor(_rounds), _reloadTime, _gunnerArty] spawn {
 	params["_artillery", "_targetPos", "_areaSpread", "_ammoClass", "_rounds", "_reloadTime", "_gunnerArty"];
 	[format ["The enemy artillery is firing at pos %1 with class ammo %2. Rounds: %3",_targetPos, _ammoClass, _rounds], "FIRE MISSION"] call KPLIB_fnc_log;
 	for "_i" from 1 to _rounds do {
 		_randomPos = [[[_targetPos, _areaSpread]], []] call BIS_fnc_randomPos;
 
-		// Fire artillery
 		if (local _artillery) then {
 			_artillery doArtilleryFire [_randomPos, _ammoClass, 1];
 		} else {
