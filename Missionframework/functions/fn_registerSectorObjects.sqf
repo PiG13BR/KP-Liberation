@@ -2,7 +2,7 @@
     File: fn_registerSectorObjects.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-23
-    Last Update: 2024-11-30
+    Last Update: 2024-12-15
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -23,9 +23,10 @@ if (!isServer) exitWith {};
 	// Get all placed objects near sectors
 	{
 		_editedObjs = nearestObjects [(markerPos _x), ["Static", "Thing"], _radius];
-		_terrainObjs = nearestTerrainObjects [(markerPos _x), [], _radius]; // Get the terrain objects. It will also get simple objects set up from attributes.
+        // Get the terrain objects. It will also get simple objects set up from attributes.
+		_terrainObjs = nearestTerrainObjects [(markerPos _x), [], _radius]; 
 
-		_onlyEditedObjs = (_editedObjs - _terrainObjs) select {!((typeOf _x) in KPLIB_radioTowerClassnames)}; // Exclude terrain objects and radio towers
+		_onlyEditedObjs = (_editedObjs - _terrainObjs);
 
 		_allObjects append _onlyEditedObjs;
 	}forEach KPLIB_sectors_all;
@@ -38,8 +39,12 @@ if (!isServer) exitWith {};
 	{
 		// Ignore object from blacklist (the object will not be deleted in game start and will retain any attributes from editor)
 		if (_x in KPLIB_sector_ObjectsBlacklist) then { continue };
+		// Ignore objects from config and player presets
+		if ((typeOf _x) in KPLIB_radioTowerClassnames) then { continue };
+
+		if ((typeOf _x) in [KPLIB_b_smallStorage, KPLIB_b_largeStorage, KPLIB_b_crateSupply, KPLIB_b_crateAmmo, KPLIB_b_crateFuel]) then { continue };
+
 		private _sector = [_radius, getPos _x] call KPLIB_fnc_getNearestSector; // Nearest sector will be the key for the hashmap
-		
 		if (_sector isEqualTo "") then {[format ["%1 in position %2 is too far away from any sectors. Deleting the object.", (typeOf _x), (getPos _x)], "WARNING"] call KPLIB_fnc_log; deleteVehicle _x; continue};
 		
 		// Check if the key (sector) is already in the hashmap
