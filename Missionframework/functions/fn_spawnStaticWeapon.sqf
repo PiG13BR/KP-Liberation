@@ -2,7 +2,7 @@
     File: fn_spawnStaticWeapon.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-22
-    Last Update: 2024-11-22
+    Last Update: 2024-12-18
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
@@ -19,8 +19,8 @@
 
 params ["_relPos", "_class", "_relDir"];
 
-_weapon = createVehicle [_staticClass, _relPos, [], 0, "CAN_COLLIDE"];
-_weapon setDir ((getDir _garrison) + (_relDir));
+_weapon = createVehicle [_class, _relPos, [], 0, "CAN_COLLIDE"];
+_weapon setDir _relDir;
 _weapon setVectorUp surfaceNormal getPosASL _weapon;
 _crewGrp = createVehicleCrew _weapon;
 
