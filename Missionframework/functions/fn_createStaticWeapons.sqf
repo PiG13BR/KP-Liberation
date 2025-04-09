@@ -2,15 +2,15 @@
     File: fn_createStaticWeapons.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-22
-    Last Update: 2024-11-30
+    Last Update: 2025-04-09
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
        Create static weapons on available structures in the sector, provided the structures are defined in KPLIB_staticsConfig.sqf file
 
     Parameter(s):
-        _sector - sector to search for buildings to spawn static weapons
-		_radius - radius of search
+        _sector - sector to search for buildings to spawn static weapons [STRING, defaults to ""]
+		_objects - sector objects [ARRAY, defaults to []]
 
     Returns:
         All static weapons created [ARRAY]
@@ -20,22 +20,15 @@ if (!isServer) exitWith {};
 
 params[
 	["_sector", "", [""]], 
-	["_radius", 500, [0]]
+	["_objects", [], [[]]]
 ];
 
 private _allStaticWeapons = [];
-private _sectorpos = markerPos _sector;
+if (_sector isEqualTo "") exitWith {["No sector provided in fn_createStaticWeapons", "WARNING"] call KPLIB_fnc_log; _allStaticWeapons};
+if (_objects isEqualTo []) exitWith {["No objects in the sector found", "SECTOR"] call KPLIB_fnc_log; _allStaticWeapons};
 
 // Find garrisons objects for static weapons in the activated sector
-private _allGarrisons = (nearestObjects [_sectorpos, KPLIB_staticConfigs_classes, (_radius * 1.5)]) select {alive _x};
-
-private _blacklistGarrisons = (KPLIB_GarrisonsBlacklist_HashMap get _sector);
-if (!isNil "_blacklistGarrisons") then {
-	{
-		_pos = _x;
-		_allGarrisons = _allGarrisons select {!(_pos distance2d _x < 2)};
-	}forEach _blacklistGarrisons;
-};
+private _allGarrisons = _objects select {(typeOf _x) in KPLIB_staticConfigs_classes};
 
 // Create a group for the static weapons for the sector
 private _staticGroup = createGroup KPLIB_side_enemy;
@@ -93,9 +86,9 @@ if (count _allGarrisons > 0) then {
 
 						// Create the static weapon and it's crew
 						_weapon = [(_garrison modelToWorld _relPos), _staticClass, (getDir _garrison + (_relDir))] call KPLIB_fnc_spawnStaticWeapon;
-						// Group the static weapons to share information easily.
-						(crew _weapon) joinSilent _staticGroup;
-						_allStaticWeapons pushBack _weapon;
+						if (!isNil "_weapon") then {
+							_allStaticWeapons pushBack _weapon;
+						};
 					};
 				};
 			}
