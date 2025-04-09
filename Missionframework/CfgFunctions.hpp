@@ -71,9 +71,8 @@ class KPLIB {
         class log                       {};
         class potatoScan                {};
         class protectObject             {};
-        class registerSectorObjects     {};
+        class registerSectorObject      {};
         class secondsToTimer            {};
-        class sectorObjectBlacklist     {};
         class setDiscordState           {};
         class setFobMass                {};
         class setLoadableViV            {};
