@@ -30,7 +30,15 @@ if ((isNil "_structures") || {count _structures < 1}) exitWith {_allGarrisons};
     _dir = ((_x # 1) # 1);
 
     _object = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
+    _object setPosATL _pos;
     _object setDir _dir;
+
+    // Vehicles
+    if (_object isKindOf "Allvehicles") then {
+        [_object, 0] remoteExec ["setFuel"];
+        [_object, "LOCKEDPLAYER"] remoteExec ["setVehicleLock"];
+        _object lockDriver true;
+    };
 
     _allGarrisons pushBack _object;
 }forEach _structures;
