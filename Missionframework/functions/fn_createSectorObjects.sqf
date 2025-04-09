@@ -2,7 +2,7 @@
     File: fn_createSectorObjects.sqf
     Author: PiG13BR - https://github.com/PiG13BR
     Date: 2024-11-22
-    Last Update: 2024-11-30
+    Last Update: 2024-12-16
     License: MIT License - http://www.opensource.org/licenses/MIT
 
     Description:
