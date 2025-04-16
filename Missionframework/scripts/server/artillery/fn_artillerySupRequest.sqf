@@ -2,7 +2,7 @@
 	File: fn_artillerySupRequest.sqf
 	Author: PiG13BR - https://github.com/PiG13BR
 	Date: 2024-09-10
-	Last Update: 2024-10-25
+	Last Update: 2025-04-16
 	License: MIT License - http://www.opensource.org/licenses/MIT
 
 	Description:
@@ -52,7 +52,7 @@ if ((_visibility > 0.1) && {_knowsAbout > 1.5}) then {
 	_grpLeader selectWeapon (binocular _grpLeader);
 	
 	sleep 10 + (random 10); // The players has a chance to kill the leader before calling the arty strike
-	if (!(alive _grpLeader) || {[_grpLeader] call KPLIB_fnc_aceCheckUnitUnconscious}) exitWith {};
+	if (!(alive _grpLeader) || {!([_grpLeader] call KPLIB_fnc_ace_isAwake)}) exitWith {};
 
 	// From this point, enemy artillery strike is unavoidable
 
