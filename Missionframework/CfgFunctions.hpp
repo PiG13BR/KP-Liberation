@@ -2,7 +2,7 @@ class KPLIB {
     class functions {
         file = "functions";
         
-        class aceCheckUnitUnconscious   {};
+        class ace_isAwake               {};
         class addActionsFob             {};
         class addActionsPlayer          {};
         class addObjectInit             {};
