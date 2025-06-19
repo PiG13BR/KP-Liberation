@@ -35,6 +35,8 @@ if (KPLIB_ace && KPLIB_param_arsenalType) then {
     };
 };
 
+_loadouts_data sort true;
+
 waitUntil { dialog };
 
 if ( count _loadouts_data > 0 ) then {
