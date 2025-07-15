@@ -15,7 +15,7 @@
         -
 */
 
-params["_classRole", "", [""]];
+params[["_classRole", "", [""]]];
 
 // ---------------------------------------------------------- Variabes/classification of equipments to be used for the roles
 // The already existed variables are suggestion, you can delete them all or used it, but make sure you configure them with the roles below in this file
