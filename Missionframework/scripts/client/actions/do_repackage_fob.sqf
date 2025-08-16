@@ -29,12 +29,10 @@ if (dorepackage > 0) then {
 
     if (dorepackage == 1) then {
         private _fobbox = KPLIB_b_fobBox createVehicle _spawnpos;
-        [_fobbox] call KPLIB_fnc_addObjectInit;
     };
 
     if (dorepackage == 2) then {
         private _fobTruck = KPLIB_b_fobTruck createVehicle _spawnpos;
-        [_fobTruck] call KPLIB_fnc_addObjectInit;
     };
     hint localize "STR_FOB_REPACKAGE_HINT";
 };

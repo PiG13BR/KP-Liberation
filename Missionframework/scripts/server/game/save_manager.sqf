@@ -351,9 +351,6 @@ if (!isNil "_saveData") then {
             _object setPosWorld _pos;
             _object setVectorDirAndUp [_vecDir, _vecUp];
 
-            // Process KP object init
-            [_object] call KPLIB_fnc_addObjectInit;
-
             // Apply kill manager handling, if not excluded
             if !((toLower _class) in _noKillHandler) then {
                 _object addMPEventHandler ["MPKilled", {

@@ -1,3 +1,5 @@
+[] call compile preprocessFileLineNumbers "KPLIB_objectInits.sqf";
+
 // AI
 add_civ_waypoints = compile preprocessFileLineNumbers "scripts\server\ai\add_civ_waypoints.sqf";
 add_defense_waypoints = compile preprocessFileLineNumbers "scripts\server\ai\add_defense_waypoints.sqf";

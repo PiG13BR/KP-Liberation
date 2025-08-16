@@ -44,9 +44,6 @@ isNil {
     // Join to target group to preserve Side
     [_unit] joinSilent _group;
     deleteGroup _groupTemp;
-
-    // Process KP object init
-    [_unit] call KPLIB_fnc_addObjectInit;
 };
 
 _unit

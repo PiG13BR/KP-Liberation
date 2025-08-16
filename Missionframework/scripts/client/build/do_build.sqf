@@ -310,8 +310,6 @@ while { true } do {
                     _vehicle setpos _truepos;
                 };
 
-                [_vehicle] call KPLIB_fnc_addObjectInit;
-
                 [_vehicle] call KPLIB_fnc_clearCargo;
 
                 if (buildtype == 6 || buildtype == 99 || (toLower _classname) in KPLIB_storageBuildings || _classname isEqualTo KPLIB_b_logiStation || _classname isEqualTo KPLIB_b_airControl) then {

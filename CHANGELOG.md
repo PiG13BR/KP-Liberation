@@ -15,6 +15,7 @@
 * Tweaked: GM East enemy preset, lower the chance for unarmed BRDM.
 * Tweaked: Moved mission build tool into subdirectory
 * Tweaked: Loadouts now display alphabetically
+* Tweaked: Removed addObjectInit function. Now it works inside an "EntityCreated" Mission Event Handler.Init execution of the KPLIB_objectInits.sqf file moved to init_server.sqf.
 * Fixed: Description.ext stated 34 players while there are also 3 additional HC slots, so 37 in total.
 * Fixed: Sector monitor got stuck after sector cap was reached until restarting the server.
 * Fixed: FOB truck got mass set, but should've just apply to FOB boxes.

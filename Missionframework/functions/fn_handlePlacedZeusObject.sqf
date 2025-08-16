@@ -36,7 +36,6 @@ if (_vehicle) then {
             params ["_unit", "_killer"];
             ["KPLIB_manageKills", [_unit, _killer]] call CBA_fnc_localEvent;
         }];
-        [_x] call KPLIB_fnc_addObjectInit;
     } forEach (crew _obj);
 };
 
@@ -53,8 +52,5 @@ if !(_crate) then {
     [_obj, true] call KPLIB_fnc_clearCargo;
     if (KPLIB_ace) then {[_obj, true, [0, 1.5, 0], 0] remoteExec ["ace_dragging_fnc_setCarryable"];};
 };
-
-// Add object init codes
-[_obj] call KPLIB_fnc_addObjectInit;
 
 true

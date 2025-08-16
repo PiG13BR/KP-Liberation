@@ -73,9 +73,6 @@ if (_classname in KPLIB_o_helicopters) then {
 // Clear cargo, if enabled
 [_newvehicle] call KPLIB_fnc_clearCargo;
 
-// Process KP object init
-[_newvehicle] call KPLIB_fnc_addObjectInit;
-
 // Spawn crew of vehicle
 if (_classname in KPLIB_o_militiaVehicles) then {
     [_newvehicle] call KPLIB_fnc_spawnMilitiaCrew;

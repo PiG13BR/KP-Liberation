@@ -43,7 +43,6 @@ private _veh = objNull;
         _veh setDamage 0;
         _veh allowDamage true;
         _veh setVariable ["KPLIB_preplaced", true, true];
-        [_veh] call KPLIB_fnc_addObjectInit;
     };
 } forEach [
     ["littlebird_", KPLIB_b_addHeli],

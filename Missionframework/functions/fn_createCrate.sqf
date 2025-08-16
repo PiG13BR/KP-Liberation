@@ -38,7 +38,4 @@ _crate setVariable ["KPLIB_crate_value", _amount, true];
 // Add ACE carry functionality
 if (KPLIB_ace) then {[_crate, true, [0, 1.5, 0], 0] remoteExec ["ace_dragging_fnc_setCarryable"];};
 
-// Process KP object init
-[_crate] call KPLIB_fnc_addObjectInit;
-
 _crate

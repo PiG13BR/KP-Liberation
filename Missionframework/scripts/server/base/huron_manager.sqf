@@ -24,7 +24,6 @@ while {true} do {
         KPLIB_potato01 enableSimulationGlobal true;
         KPLIB_potato01 setDamage 0;
         KPLIB_potato01 allowdamage true;
-        [KPLIB_potato01] call KPLIB_fnc_addObjectInit;
     };
     [KPLIB_potato01] call KPLIB_fnc_clearCargo;
     KPLIB_potato01 setVariable ["ace_medical_isMedicalVehicle", true, true];

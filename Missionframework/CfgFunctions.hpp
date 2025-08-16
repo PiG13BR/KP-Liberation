@@ -4,7 +4,6 @@ class KPLIB {
 
         class addActionsFob             {};
         class addActionsPlayer          {};
-        class addObjectInit             {};
         class addRopeAttachEh           {};
         class allowCrewInImmobile       {};
         class checkClass                {};

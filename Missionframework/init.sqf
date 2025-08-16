@@ -18,7 +18,6 @@ if (!isServer) then {waitUntil {!isNil "KPLIB_initServerDone"};};
 [] call compile preprocessFileLineNumbers "KPLIB_classnameLists.sqf";
 [] call compile preprocessFileLineNumbers "scripts\shared\fetch_params.sqf";
 [] call compile preprocessFileLineNumbers "presets\init_presets.sqf";
-[] call compile preprocessFileLineNumbers "KPLIB_objectInits.sqf";
 
 // Activate selected player menu. If CBA isn't loaded -> fallback to GREUH
 if (KPPLM_CBA && KPLIB_param_playerMenu) then {

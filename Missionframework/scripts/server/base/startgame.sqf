@@ -23,7 +23,6 @@ if (KPLIB_sectors_fob isEqualTo []) then {
             _fobbox setdir getDir base_boxspawn;
             _fobbox setposATL (getposATL base_boxspawn);
             [_fobbox, true] call KPLIB_fnc_clearCargo;
-            [_fobbox] call KPLIB_fnc_addObjectInit;
 
             // If the FOB box has fallen into the sea or is destroyed, start again with spawning a new one
             waitUntil {
